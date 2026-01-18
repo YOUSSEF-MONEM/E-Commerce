@@ -30,7 +30,7 @@ namespace E_Commerce2.Controllers
         // Product CRUD Operations
         // ========================================
 
-        // ✅ POST: api/Products
+        //  POST: api/Products
         [HttpPost]
         [CheckPermission(Roles.Seller)]
         public async Task<IActionResult> Create([FromBody] RegisterProductDto productDto)
@@ -40,7 +40,7 @@ namespace E_Commerce2.Controllers
 
             int sellerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-            // ✅ Step 1: Create Product
+            //  Step 1: Create Product
             var productResult = Product.Create(
                 productDto.ProductName,
                 productDto.Price,
@@ -62,10 +62,10 @@ namespace E_Commerce2.Controllers
 
             try
             {
-                // ✅ Step 2: Save Product to get ProductId
+                //  Step 2: Save Product to get ProductId
                 await _unitOfWork.SaveChangesAsync();
 
-                // ✅ Step 3: Add Product Image if provided
+                //  Step 3: Add Product Image if provided
                 if (!string.IsNullOrWhiteSpace(productDto.ProductImageURL))
                 {
                     var imageResult = ProductImage.Create(product.Id, productDto.ProductImageURL);
@@ -182,7 +182,7 @@ namespace E_Commerce2.Controllers
             return Ok(productsDto);
         }
 
-        // ✅ GET: api/Products
+        //  GET: api/Products
         [HttpGet("search")]
         [CheckPermission(Roles.User)]
         public async Task<IActionResult> GetByName([FromQuery]string  productName)
@@ -212,7 +212,7 @@ namespace E_Commerce2.Controllers
             return Ok(productsDto);
         }
 
-        // ✅ PUT: api/Products
+        //  PUT: api/Products
         [HttpPut("{id}")] // ال Id هيكون الفرنت اند حافظه عشان لما يضغط على تعديل المنتج هيبعته مع الريكوست 
         [CheckPermission(Roles.Seller)]
         public async Task<IActionResult> Update(int id,[FromBody] UpdateProductDto updateProductDto)
@@ -246,7 +246,7 @@ namespace E_Commerce2.Controllers
             }
         }
 
-        // ✅ DELETE: api/Products/5
+        // DELETE: api/Products/5
         [HttpDelete("{id}")]
         [CheckPermission(Roles.Seller)]
         public async Task<IActionResult> Delete(int id)//id هيكون فيه في منتجات البائع ان كل منتج عليه زي زرار اسمو حذف ومن هنا اصلا هيكون الاي دي موجود مع الفرنت فيبعته في اليو ار ال
@@ -260,7 +260,7 @@ namespace E_Commerce2.Controllers
             if (product.SellerId != sellerId)
                 return Forbid();
 
-            // ✅ Delete associated images first (if using Restrict DeleteBehavior)
+            // Delete associated images first (if using Restrict DeleteBehavior)
             var images = await _unitOfWork.ProductImages.GetImagesByProductIdAsync(id);
             foreach (var image in images)
             {
@@ -285,7 +285,7 @@ namespace E_Commerce2.Controllers
         // Product Images Operations
         // ========================================
 
-        // ✅ POST: api/Products/5/images - Add image(s) to existing product
+        //  POST: api/Products/5/images - Add image(s) to existing product
         [HttpPost("{productId}/images")] // طبعا ال id بتاع المنتج هيبقى مع الفرنت اند عشان لما يضغط على اضافه صوره هيبعته مع الريكوست انا كباك اند لبرجع ال id مع الريسبونس فالفرنت اند هيقدر يحتفظ بيه
         [CheckPermission(Roles.Seller)]
         public async Task<IActionResult> AddProductImage(int productId,
@@ -341,7 +341,7 @@ namespace E_Commerce2.Controllers
             }
         }
 
-        // ✅ POST: api/Products/5/images/multiple - Add multiple images
+        //  POST: api/Products/5/images/multiple - Add multiple images
         //ممكن اشيل الاكشن ده لو مش هستخدمه لان انا ممكن اضيف صوره واحده واحده من خلال الاكشن اللي فوق
         [HttpPost("{productId}/images/multiple")]
         [CheckPermission(Roles.Seller)]
@@ -405,7 +405,7 @@ namespace E_Commerce2.Controllers
             }
         }
 
-        // ✅ GET: api/Products/5/images - Get all images for a product
+        //  GET: api/Products/5/images - Get all images for a product
         [HttpGet("{productId}/images")]
         [AllowAnonymous]
         public async Task<IActionResult> GetProductImages(int productId)//هجيب الصور بتاعت المنتج لما يضغط عليها عشان يشوفها طبعا ال id بتاع المنتج هيبقى مع الريكوست اللي بيكون محفوظ في الفرنت اند
@@ -429,7 +429,7 @@ namespace E_Commerce2.Controllers
             });
         }
 
-        // ✅ DELETE: api/Products/images/5 - Delete specific image
+        //  DELETE: api/Products/images/5 - Delete specific image
         [HttpDelete("{productId}/images/{imageId}")]
         /*
                  images = images.Select(i => new
@@ -470,7 +470,7 @@ namespace E_Commerce2.Controllers
             }
         }
 
-        // ✅ DELETE: api/Products/5/images - Delete all images for a product
+        //  DELETE: api/Products/5/images - Delete all images for a product
         [HttpDelete("{productId}/images")]
         [CheckPermission(Roles.Seller)]
         public async Task<IActionResult> DeleteAllProductImages(int productId)
@@ -513,7 +513,7 @@ namespace E_Commerce2.Controllers
             // Stock Operations
             // ========================================
 
-            // ✅ POST: api/Products/5/add-stock
+            //  POST: api/Products/5/add-stock
             [HttpPost("{productId}/add-stock")]
             [CheckPermission(Roles.Seller)]
             public async Task<IActionResult> AddStock(int productId, [FromBody] StockQuantityDto request)
@@ -550,7 +550,7 @@ namespace E_Commerce2.Controllers
                 }
             }
 
-            // ✅ POST: api/Products/5/remove-stock
+            //  POST: api/Products/5/remove-stock
             [HttpPost("{productId}/remove-stock")]
             [CheckPermission(Roles.Seller)]
             public async Task<IActionResult> RemoveStock(int productId, [FromBody] StockQuantityDto request)
@@ -591,7 +591,7 @@ namespace E_Commerce2.Controllers
         // Reviews Operations
         // ========================================
 
-        // ✅ POST: api/Products/Add-Review
+        //  POST: api/Products/Add-Review
         [HttpPost("{productId}/Add-Review")]
         [CheckPermission(Roles.User)] // اي يوزر مسجل يقدر يضيف ريفيو يعني لازم يكون عنده اكونت وعامل لوجين
         public async Task<IActionResult> AddReview(int productId,[FromBody] RegisterReview review)
@@ -638,7 +638,7 @@ namespace E_Commerce2.Controllers
             }
         }
 
-        // ✅ GET: api/Products/5/reviews
+        //  GET: api/Products/5/reviews
         [HttpGet("{productId}/reviews")]
         [AllowAnonymous]//اي حد يقدر يشوف الريفيوهات حتى لو مش مسجل
         public async Task<IActionResult> GetReviews(int productId)
@@ -666,7 +666,7 @@ namespace E_Commerce2.Controllers
             return Ok(reviewsDto);
         }
 
-        // ✅ PUT: api/Products/Update-Review
+        //  PUT: api/Products/Update-Review
         [HttpPut("{reviewId}/Update-Review")]
         [CheckPermission(Roles.User)]
         public async Task<IActionResult> UpdateReview(int reviewId,[FromBody] UpdateReviewDto updateReviewDto)
@@ -698,7 +698,7 @@ namespace E_Commerce2.Controllers
             }
         }
 
-        // ✅ DELETE: api/Products/Delete-Review/5
+        //  DELETE: api/Products/Delete-Review/5
         [HttpDelete("Delete-Review/{reviewId}")]
         [CheckPermission(Roles.User)]
         public async Task<IActionResult> DeleteReview(int reviewId)

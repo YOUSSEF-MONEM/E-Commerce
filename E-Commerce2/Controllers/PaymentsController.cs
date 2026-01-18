@@ -155,16 +155,16 @@ namespace E_Commerce2.Controllers
             if (order.UserId != userId)
                 return StatusCode(403, new { message = "This Order is not for you" }); //Forbid
 
-            // ✅ Check if payment already exists
+            //  Check if payment already exists
             var existingPayment = await _unitOfWork.Payments.GetPaymentByOrderIdAsync(dto.OrderId);
             if (existingPayment != null)
                 return BadRequest(new { message = "Payment already exists for this order" });
 
-            // ✅ Check order status
+            //  Check order status
             if (order.OrderStatus == OrderStatuses.Cancelled)
                 return BadRequest(new { message = "Cannot create payment for cancelled order" });
 
-            // ✅ Create Payment
+            //  Create Payment
             var paymentResult = Payment.Create(
                 order.Id,
                 order.UserId,
@@ -176,7 +176,7 @@ namespace E_Commerce2.Controllers
 
             var payment = paymentResult.Value!;
 
-            // ✅ Attach Payment to Order
+            //  Attach Payment to Order
             var attachResult = order.AttachPayment(payment);
             if (!attachResult.IsSuccess)
                 return BadRequest(new { message = attachResult.Error });
@@ -230,7 +230,7 @@ namespace E_Commerce2.Controllers
             if (!confirmResult.IsSuccess)
                 return BadRequest(new { message = confirmResult.Error });
 
-            // ✅ Update Order Status if needed
+            //  Update Order Status if needed
             var order = await _unitOfWork.Orders.GetByIdAsync(payment.OrderId);
             if (order != null && order.OrderStatus == OrderStatuses.Pending)
             {
@@ -375,7 +375,7 @@ namespace E_Commerce2.Controllers
             if (payment == null)
                 return NotFound(new { message = "Payment not found" });
 
-            // ✅ Only allow deleting pending or failed payments
+            //  Only allow deleting pending or failed payments
             if (payment.PaymentStatus == PaymentStatuses.Paid ||
                 payment.PaymentStatus == PaymentStatuses.Refunded)
             {

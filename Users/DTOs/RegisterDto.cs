@@ -13,7 +13,7 @@ namespace Users.DTOs
         public string Password { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
 
-        // ✅ Optional: Role (افتراضي = User)
+        //  Optional: Role (افتراضي = User)
         //public Roles? Role { get; set; }
     }
 }

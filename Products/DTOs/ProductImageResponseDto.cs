@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Products.DTOs
 {
-    // ✅ DTO for Product Image Response
+    //  DTO for Product Image Response
     public class ProductImageResponseDto
     {
         public int Id { get; set; }

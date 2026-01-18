@@ -20,12 +20,12 @@ namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
 
 
 
-            // ✅ تكوين RefreshTokens كـ Owned Entity
+            //  تكوين RefreshTokens كـ Owned Entity
             builder.OwnsMany(u => u.RefreshTokens, rt =>
                 {
                     rt.WithOwner().HasForeignKey("UserId");
                     rt.Property(t => t.Token).HasMaxLength(500); // حد أقصى للطول
-                    rt.HasIndex(t => t.Token).IsUnique(); // ✅ Token فريد
+                    rt.HasIndex(t => t.Token).IsUnique(); //  Token فريد
                 });
             
 

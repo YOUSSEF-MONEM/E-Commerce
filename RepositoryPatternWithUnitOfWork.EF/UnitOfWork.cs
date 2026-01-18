@@ -36,9 +36,9 @@ namespace RepositoryPatternWithUnitOfWork.EF
         }
 
         //  Lazy Loading Properties
-        /// <summary>
-        /// المميزات: الـ Repository بيتعمل لما تحتاجه فقط
-        /// </summary>
+
+        // المميزات: الـ Repository بيتعمل لما تحتاجه فقط
+
         public IUserRepository Users => _users ??= new UserRepository(_context);
 
         public IProductRepository Products => _products ??= new ProductRepository(_context);

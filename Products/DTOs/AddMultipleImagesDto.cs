@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Products.DTOs
 {
-    // ✅ DTO for Adding Multiple Images
+    //  DTO for Adding Multiple Images
     public class AddMultipleImagesDto
     {
         [Required(ErrorMessage = "At least one image URL is required")]

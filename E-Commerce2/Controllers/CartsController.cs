@@ -158,7 +158,7 @@ namespace E_Commerce2.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // ✅ Validate Cart
+            //  Validate Cart
             var cart = await _unitOfWork.Carts.GetByIdAsync(cartId);
             if (cart == null)
                 return NotFound(new { message = "Cart not found" });
@@ -168,12 +168,12 @@ namespace E_Commerce2.Controllers
             if (cart.UserId != userId)
                 return Forbid();
 
-            // ✅ Validate Product (await properly!)
+            //  Validate Product (await properly!)
             var product = await _unitOfWork.Products.GetByIdAsync(dto.ProductId);
             if (product == null)
                 return NotFound(new { message = "Product not found" });
 
-            // ✅ Check Stock
+            //  Check Stock
             if (product.QuantityInStock < dto.Quantity)
                 return BadRequest(new
                 {
@@ -182,7 +182,7 @@ namespace E_Commerce2.Controllers
                     requested = dto.Quantity
                 });
 
-            // ✅ Add to Cart (using Cart method!)
+            //  Add to Cart (using Cart method!)
             var addResult = cart.AddProduct(dto.ProductId, dto.Quantity, product.Price);
             if (!addResult.IsSuccess)
                 return BadRequest(new { message = addResult.Error });
@@ -228,7 +228,7 @@ namespace E_Commerce2.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // ✅ Validate Cart
+            //  Validate Cart
             var cart = await _unitOfWork.Carts.GetByIdAsync(cartId);
             if (cart == null)
                 return NotFound(new { message = "Cart not found" });
@@ -237,7 +237,7 @@ namespace E_Commerce2.Controllers
             if (cart.UserId != userId)
                 return Forbid();
 
-            // ✅ Check Stock
+            //  Check Stock
             var product = await _unitOfWork.Products.GetByIdAsync(productId);
             if (product == null)
                 return NotFound(new { message = "Product not found" });
@@ -249,7 +249,7 @@ namespace E_Commerce2.Controllers
                     available = product.QuantityInStock
                 });
 
-            // ✅ Update Quantity
+            //  Update Quantity
             var updateResult = cart.UpdateProductQuantity(productId, dto.Quantity);
             if (!updateResult.IsSuccess)
                 return BadRequest(new { message = updateResult.Error });

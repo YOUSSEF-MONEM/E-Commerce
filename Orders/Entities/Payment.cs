@@ -13,20 +13,20 @@ namespace Orders.Entities
         public PaymentMethods? PaymentMethod { get; private set; }
         public string? TransactionId { get; private set; } // ✅ معرف المعاملة من Payment Gateway
 
-        // ✅ Foreign Keys
+        //  Foreign Keys
         public int OrderId { get; private set; }
         public int UserId { get; private set; }
 
-        // ✅ Navigation Property
+        //  Navigation Property
         public Order? Order { get; private set; }
 
-        // ✅ Constructor خاص للـ EF Core
+        //  Constructor خاص للـ EF Core
         private Payment()
         {
             PaymentStatus = PaymentStatuses.Pending;
         }
 
-        // ✅ Factory Method
+        //  Factory Method
         public static Result<Payment> Create(
             int orderId,
             int userId,
@@ -65,7 +65,7 @@ namespace Orders.Entities
             if (!Enum.IsDefined(typeof(PaymentMethods), paymentMethod))
                 return Result.Failure("Invalid payment method");
 
-            // ✅ Set payment fields
+            //  Set payment fields
             TransactionId = transactionId.Trim();
             PaymentMethod = paymentMethod;
             PaymentDate = DateTime.UtcNow;
@@ -74,7 +74,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Mark Payment as Failed
+        //  Mark Payment as Failed
         public Result MarkPaymentFailed()
         {
             if (PaymentStatus == PaymentStatuses.Paid)
@@ -87,7 +87,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Request Refund
+        //  Request Refund
         public Result RequestRefund()
         {
             if (PaymentStatus != PaymentStatuses.Paid)
@@ -100,7 +100,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Update Amount (قبل الدفع فقط)
+        //  Update Amount (قبل الدفع فقط)
         public Result UpdateAmount(decimal newAmount)
         {
             if (PaymentStatus == PaymentStatuses.Paid)
@@ -116,7 +116,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Helper Methods
+        //  Helper Methods
         public bool IsPaid() => PaymentStatus == PaymentStatuses.Paid;
 
         public bool IsPending() => PaymentStatus == PaymentStatuses.Pending;

@@ -39,7 +39,7 @@ namespace E_Commerce2.Middleware
             httpContext.Response.StatusCode = statusCode;
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
-            return true; // ✅ true = تم معالجة الـ Exception
+            return true; //  true = تم معالجة الـ Exception
         }
     }
 }

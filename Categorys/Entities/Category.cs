@@ -162,19 +162,14 @@ namespace Categories.Entities
 
         //  Helper Methods
 
-        /// <summary>
-        /// Check if this is a root category (no parent)
-        /// </summary>
-        public bool IsRootCategory() => ParentCategoryId == null;
+        // Check if this is a root category (no parent)
+          public bool IsRootCategory() => ParentCategoryId == null;
 
-        /// <summary>
-        /// Check if this category has sub-categories
-        /// </summary>
+  
+        // Check if this category has sub-categories
         public bool HasSubCategories() => SubCategories.Count > 0;
 
-        /// <summary>
-        /// Get the depth level of this category
-        /// </summary>
+        // Get the depth level of this category
         public int GetDepthLevel()
         {
             if (IsRootCategory())

@@ -72,9 +72,9 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
                 "http://localhost:3000",      // React
                 "http://localhost:5173",      // Vite
-                "https://your-domain.com"     // Production
+                "https://My-domain.com"     // Production
               )
-              .AllowCredentials()  // ⚠️ ضروري للـ Cookies!
+              .AllowCredentials()  //  ضروري للـ Cookies!
               .AllowAnyHeader()
               .AllowAnyMethod();
         

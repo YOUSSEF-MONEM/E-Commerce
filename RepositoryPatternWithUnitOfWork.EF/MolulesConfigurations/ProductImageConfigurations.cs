@@ -11,7 +11,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
             builder.ToTable("ProductImages");
             builder.HasKey(pi => pi.Id);
 
-            // ✅ Properties
+            //  Properties
             builder.Property(pi => pi.ImageURL)
                 .IsRequired()
                 .HasMaxLength(500)
@@ -21,17 +21,17 @@ namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
             builder.Property(pi => pi.ProductId)
                 .IsRequired();
 
-            // ✅ Relationships
+            //  Relationships
             builder.HasOne(pi => pi.Product)
-                .WithMany(p => p.ProductImages) // ✅ Assuming Product has ProductImages collection
+                .WithMany(p => p.ProductImages) //  Assuming Product has ProductImages collection
                 .HasForeignKey(pi => pi.ProductId)
-                .OnDelete(DeleteBehavior.Cascade); // ✅ Delete images when product is deleted
+                .OnDelete(DeleteBehavior.Cascade); //  Delete images when product is deleted
 
-            // ✅ Indexes
+            //  Indexes
             builder.HasIndex(pi => pi.ProductId)
                 .HasDatabaseName("IX_ProductImages_ProductId");
 
-            // ✅ Optional: Index for faster image lookups   
+            //  Optional: Index for faster image lookups   
             builder.HasIndex(pi => pi.ImageURL)
                 .HasDatabaseName("IX_ProductImages_ImageURL");
         }

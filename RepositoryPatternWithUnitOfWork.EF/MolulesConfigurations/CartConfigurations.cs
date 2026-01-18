@@ -11,10 +11,10 @@ namespace RepositoryPatternWithUnitOfWork.EF.Configurations
         {
             builder.ToTable("Carts");
 
-            // ✅ Primary Key
+            //  Primary Key
             builder.HasKey(c => c.Id);
 
-            // ✅ Properties
+            //  Properties
             builder.Property(c => c.UserId)
                 .IsRequired();
 
@@ -25,7 +25,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.Configurations
             builder.Property(c => c.UpdatedAt)
                 .IsRequired(false);
 
-            // ✅ Relationships
+            //  Relationships
             builder.HasOne<Users.Entities.User>() //No navigation property in Cart
                 .WithMany() // كل User ممكن يكون عنده Carts كتير
                 .HasForeignKey(c => c.UserId)

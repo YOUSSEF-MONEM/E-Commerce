@@ -13,17 +13,17 @@ namespace Carts.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        // ✅ Navigation Properties
+        //  Navigation Properties
        
         public ICollection<CartProduct> CartProducts { get; private set; } = new List<CartProduct>();
 
-        // ✅ Constructor خاص للـ EF Core
+        //  Constructor خاص للـ EF Core
         private Cart()
         { 
             CreatedAt = DateTime.UtcNow;
         }
 
-        // ✅ Factory Method
+        //  Factory Method
         public static Result<Cart> Create(int userId)
         {
             if (userId <= 0)
@@ -47,7 +47,7 @@ namespace Carts.Entities
             return Result<Cart>.Success(cartUpdating);
         }
 
-        // ✅ Add Product to Cart
+        //  Add Product to Cart
         public Result<CartProduct> AddProduct(int productId, int quantity, decimal unitPrice)
         {
             if (productId <= 0)
@@ -59,7 +59,7 @@ namespace Carts.Entities
             if (unitPrice <= 0)
                 return Result<CartProduct>.Failure("Unit price must be greater than zero");
 
-            // ✅ Check if product already exists
+            // Check if product already exists
             var existingProduct = CartProducts.FirstOrDefault(cp => cp.ProductId == productId);
 
             if (existingProduct != null)
@@ -84,7 +84,7 @@ namespace Carts.Entities
             return Result<CartProduct>.Success(cartProductResult.Value!);
         }
 
-        // ✅ Remove Product from Cart
+        //  Remove Product from Cart
         public Result RemoveProduct(int productId)
         {
             var cartProduct = CartProducts.FirstOrDefault(cp => cp.ProductId == productId);
@@ -98,7 +98,7 @@ namespace Carts.Entities
             return Result.Success();
         }
 
-        // ✅ Update Product Quantity
+        //  Update Product Quantity
         public Result UpdateProductQuantity(int productId, int quantity)
         {
             var cartProduct = CartProducts.FirstOrDefault(cp => cp.ProductId == productId);
@@ -114,7 +114,7 @@ namespace Carts.Entities
             return Result.Success();
         }
 
-        // ✅ Clear Cart
+        //  Clear Cart
         public Result Clear()
         {
             CartProducts.Clear();
@@ -122,7 +122,7 @@ namespace Carts.Entities
             return Result.Success();
         }
 
-        // ✅ Helper Methods
+        //  Helper Methods
         public bool IsEmpty() => !CartProducts.Any();
 
         public int GetTotalItems() => CartProducts.Sum(cp => cp.Quantity);

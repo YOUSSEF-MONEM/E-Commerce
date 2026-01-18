@@ -91,7 +91,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.Repositories
             });
         }
 
-        // ✅ FindAsync مع دعم Includes
+        //  FindAsync مع دعم Includes
         public virtual async Task<IEnumerable<T>> FindAsync(
             Expression<Func<T, bool>> predicate,
             params Expression<Func<T, object>>[] includes)
@@ -108,7 +108,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.Repositories
             return await query.Where(predicate).ToListAsync();
         }
 
-        // ✅ النسخة البسيطة (بدون includes)
+        //  النسخة البسيطة (بدون includes)
         public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
             return await _dbContext.Set<T>()

@@ -6,7 +6,7 @@ namespace Products.DTOs
 {
     public class RegisterReview
     {
-        public double? Rating { get; set; } // ⬅️ Nullable (0-10)
+        public double? Rating { get; set; } //  Nullable (0-10)
         public string? Comment { get; set; }
     }
 }

@@ -31,12 +31,12 @@ namespace Carts.Entities
         //  Navigation Properties
         public Cart Cart { get; private set; } = null!;
 
-        // ✅ Constructor خاص للـ EF Core
+        //  Constructor خاص للـ EF Core
         private CartProduct()
         {
         }
 
-        // ✅ Factory Method
+        //  Factory Method
         public static Result<CartProduct> Create(
             int cartId,
             int productId,
@@ -78,7 +78,7 @@ namespace Carts.Entities
         }
 
 
-        // ✅ Update Quantity
+        //  Update Quantity
         public Result UpdateQuantity(int quantity)
         {
             if (quantity <= 0)

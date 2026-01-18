@@ -7,8 +7,8 @@ namespace Products.DTOs
     public class UpdateReviewDto
     {
 
-        public double? Rating { get;  set; } // ⬅️ Nullable (0-10)
-        public string? Comment { get;  set; } // ⬅️ Nullable
+        public double? Rating { get;  set; } // Nullable (0-10)
+        public string? Comment { get;  set; } //  Nullable
 
     }
 }

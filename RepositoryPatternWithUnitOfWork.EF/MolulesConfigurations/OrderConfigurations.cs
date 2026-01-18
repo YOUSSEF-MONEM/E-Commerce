@@ -4,7 +4,7 @@ using Orders.Entities;
 
 namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
 {
-    // ✅ Order Configuration
+    //  Order Configuration
     public class OrderConfigurations : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
@@ -12,7 +12,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
             builder.ToTable("Orders");
             builder.HasKey(o => o.Id);
 
-            // ✅ Properties
+            //  Properties
             builder.Property(o => o.ShippingAddress)
                 .IsRequired()
                 .HasMaxLength(500);
@@ -23,15 +23,15 @@ namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
 
             builder.Property(o => o.OrderStatus)
                 .IsRequired()
-                .HasConversion<int>(); // ✅ تخزين Enum كـ int
+                .HasConversion<int>(); //  تخزين Enum كـ int
 
             builder.Property(o => o.UserId)
                 .IsRequired();
 
-            // ✅ TotalAmount - Computed Property (Ignored)
+            //  TotalAmount - Computed Property (Ignored)
             builder.Ignore(o => o.TotalAmount);
 
-            // ✅ Relationships
+            //  Relationships
 
             // User Relationship
             builder.HasOne<Users.Entities.User>()
@@ -45,13 +45,13 @@ namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
                 .HasForeignKey(oi => oi.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // ✅ Payment Relationship (One-to-One) - Optional
+            //  Payment Relationship (One-to-One) - Optional
             builder.HasOne(o => o.Payment)
                 .WithOne(p => p.Order)
                 .HasForeignKey<Payment>(p => p.OrderId)
-                .OnDelete(DeleteBehavior.Restrict); // ✅ عشان لو حذفت Order ما يحذفش Payment تلقائيًا
+                .OnDelete(DeleteBehavior.Restrict); //  عشان لو حذفت Order ما يحذفش Payment تلقائيًا
 
-            // ✅ Indexes
+            //  Indexes
             builder.HasIndex(o => o.UserId)
                 .HasDatabaseName("IX_Orders_UserId");
 
@@ -61,7 +61,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.ModulesConfigurations
             builder.HasIndex(o => o.OrderDate)
                 .HasDatabaseName("IX_Orders_OrderDate");
 
-            // ✅ Composite Index للبحث المتقدم
+            //  Composite Index للبحث المتقدم
             builder.HasIndex(o => new { o.UserId, o.OrderStatus })
                 .HasDatabaseName("IX_Orders_UserId_OrderStatus");
         }

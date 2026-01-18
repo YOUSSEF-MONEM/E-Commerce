@@ -24,18 +24,17 @@ namespace Orders.Entities
 
         public int UserId { get; private set; }
 
-        // ✅ Navigation Properties
+        //  Navigation Properties
         public ICollection<OrderItem> OrderItems { get; private set; } = new List<OrderItem>();
         public Payment? Payment { get; private set; } // ✅ علاقة One-to-One مع Payment
 
-        // ✅ Constructor خاص للـ EF Core
+        //  Constructor خاص للـ EF Core
         private Order()
         {
             OrderDate = DateTime.UtcNow;
             OrderStatus = OrderStatuses.Pending;
         }
-
-        // ✅ Factory Method
+        //  Factory Method
         public static Result<Order> Create(
             int userId,
             string shippingAddress)
@@ -59,11 +58,11 @@ namespace Orders.Entities
 
         public Result<OrderItem> AddProduct(int productId, int quantity, decimal unitPrice)
         {
-            // 1️⃣ تحقق من حالة الأوردر
+            //  تحقق من حالة الأوردر
             if (OrderStatus != OrderStatuses.Pending)
                 return Result<OrderItem>.Failure("Cannot add products to this order");
 
-            // 2️⃣ منع تكرار المنتج
+            //  منع تكرار المنتج
             var existingItem = OrderItems.FirstOrDefault(i => i.ProductId == productId);
 
             if (existingItem != null)
@@ -75,7 +74,7 @@ namespace Orders.Entities
                 return Result<OrderItem>.Success(existingItem);
             }
 
-            // 3️⃣ إنشاء OrderItem
+            //  إنشاء OrderItem
             var createResult = OrderItem.Create(
                 Id,
                 productId,
@@ -86,7 +85,7 @@ namespace Orders.Entities
             if (!createResult.IsSuccess)
                 return Result<OrderItem>.Failure(createResult.Error);
 
-            // 4️⃣ إضافة للـ Aggregate
+            //  إضافة للـ Aggregate
             OrderItems.Add(createResult.Value!);
 
             return Result<OrderItem>.Success(createResult.Value!);
@@ -94,7 +93,7 @@ namespace Orders.Entities
 
         public Result RemoveOrderItem(int productId)
         {
-            // 🔒 Rule: لا تعديل إلا في Pending
+            //  Rule: لا تعديل إلا في Pending
             if (OrderStatus != OrderStatuses.Pending)
                 return Result.Failure("Cannot modify order that is not in Pending status");
 
@@ -109,7 +108,7 @@ namespace Orders.Entities
         }
 
 
-        // ✅ Set Shipping Address
+        //  Set Shipping Address
         public Result SetShippingAddress(string shippingAddress)
         {
             if (string.IsNullOrWhiteSpace(shippingAddress))
@@ -125,7 +124,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Set Order Date
+        //  Set Order Date
         public Result SetOrderDate(DateTime orderDate)
         {
             if (orderDate > DateTime.UtcNow)
@@ -135,7 +134,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Set Order Status
+        //  Set Order Status
         public Result SetOrderStatus(OrderStatuses status)
         {
             if (!Enum.IsDefined(typeof(OrderStatuses), status))
@@ -145,7 +144,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Attach Payment to Order
+        //  Attach Payment to Order
         public Result AttachPayment(Payment payment)
         {
             if (Payment != null)
@@ -156,7 +155,7 @@ namespace Orders.Entities
 
             Payment = payment;
 
-            // ✅ لما الدفع يتأكد، نحدث الأوردر
+            //  لما الدفع يتأكد، نحدث الأوردر
             if (payment.PaymentStatus == PaymentStatuses.Paid && OrderStatus == OrderStatuses.Pending)
             {
                 OrderStatus = OrderStatuses.Processing;
@@ -165,10 +164,10 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Ship Order
+        //  Ship Order
         public Result ShipOrder()
         {
-            // ✅ Check payment if required (حسب متطلبات المشروع)
+            //  Check payment if required (حسب متطلبات المشروع)
             // if (Payment?.PaymentStatus != PaymentStatuses.Paid)
             //     return Result.Failure("Payment must be confirmed before shipping");
 
@@ -182,13 +181,13 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Deliver Order
+        //  Deliver Order
         public Result DeliverOrder()
         {
             if (OrderStatus != OrderStatuses.Shipped)
                 return Result.Failure("Order must be shipped before delivery");
 
-            // ✅ Check payment (حسب متطلبات المشروع - دفع عند الاستلام أو قبل)
+            // Check payment (حسب متطلبات المشروع - دفع عند الاستلام أو قبل)
             if (Payment?.PaymentStatus != PaymentStatuses.Paid)
                 return Result.Failure("Payment must be confirmed before delivery");
 
@@ -196,7 +195,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Cancel Order
+        //  Cancel Order
         public Result CancelOrder()
         {
             if (OrderStatus == OrderStatuses.Delivered)
@@ -207,7 +206,7 @@ namespace Orders.Entities
 
             OrderStatus = OrderStatuses.Cancelled;
 
-            // ✅ لو كان مدفوع، نطلب Refund من Payment
+            // لو كان مدفوع، نطلب Refund من Payment
             if (Payment?.PaymentStatus == PaymentStatuses.Paid)
             {
                 var refundResult = Payment.RequestRefund();
@@ -218,7 +217,7 @@ namespace Orders.Entities
             return Result.Success();
         }
 
-        // ✅ Helper Methods
+        //  Helper Methods
         public bool IsPaid() => Payment?.PaymentStatus == PaymentStatuses.Paid;
 
         public bool IsDelivered() => OrderStatus == OrderStatuses.Delivered;

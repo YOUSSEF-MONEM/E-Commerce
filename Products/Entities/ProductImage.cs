@@ -9,15 +9,15 @@ namespace Products.Entities
         public string ImageURL { get; private set; } = string.Empty;
         public int ProductId { get; private set; }
 
-        // ✅ Navigation Property
+        //  Navigation Property
         public Product? Product { get; private set; }
 
-        // ✅ Private Constructor for EF Core
+        // Private Constructor for EF Core
         private ProductImage()
         {
         }
 
-        // ✅ Static Factory Method
+        //  Static Factory Method
         public static Result<ProductImage> Create(int productId, string imageUrl)
         {
             var productImage = new ProductImage();
@@ -37,7 +37,7 @@ namespace Products.Entities
             return Result<ProductImage>.Success(productImage);
         }
 
-        // ✅ Set Image URL
+        // Set Image URL
         public Result SetImageURL(string imageUrl)
         {
             if (string.IsNullOrWhiteSpace(imageUrl))
@@ -46,7 +46,7 @@ namespace Products.Entities
             if (imageUrl.Length > 500)
                 return Result.Failure("Image URL cannot exceed 500 characters");
 
-            // ✅ Basic URL validation
+            //  Basic URL validation
             if (!Uri.TryCreate(imageUrl, UriKind.Absolute, out var uriResult) ||
                 (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
             {
@@ -57,7 +57,7 @@ namespace Products.Entities
             return Result.Success();
         }
 
-        // ✅ Update Image URL
+        //  Update Image URL
         public Result UpdateImageURL(string newImageUrl)
         {
             return SetImageURL(newImageUrl);

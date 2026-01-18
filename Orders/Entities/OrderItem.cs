@@ -26,7 +26,7 @@ namespace Orders.Entities
         // Constructor
         private OrderItem() { }
 
-        // ✅ Factory Method
+        //  Factory Method
         public static Result<OrderItem> Create(
             int orderId,
             int productId,
@@ -35,7 +35,7 @@ namespace Orders.Entities
         {
             //دي مش محتاج اتشك عليها لانها بتجنريت لوحدها من الداتا بيز
             /*
-             🔴 ماينفعش الـ OrderItem يتحقق من OrderId
+              ماينفعش الـ OrderItem يتحقق من OrderId
 
 لأن:
 
@@ -66,7 +66,7 @@ namespace Orders.Entities
             return Result<OrderItem>.Success(orderItem);
         }
 
-        // ✅ Update Quantity
+        //  Update Quantity
         public Result UpdateQuantity(int quantity)
         {
             if (quantity <= 0)
@@ -80,7 +80,7 @@ namespace Orders.Entities
 }
 
 
-//// ✅ Update Price الاردر ايتم ملوش علاقه بالسعر بتاع المنتج 
+////  Update Price الاردر ايتم ملوش علاقه بالسعر بتاع المنتج 
 //public Result UpdatePrice(decimal unitPrice)
 //{
 //    if (unitPrice <= 0)

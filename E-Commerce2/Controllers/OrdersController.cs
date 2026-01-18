@@ -31,7 +31,7 @@ namespace E_Commerce2.Controllers
         // Order CRUD Operations
         // ========================================
 
-        // في حالة ال Pending معلق 🕒 قيد الانتظار وده متحقق منه في الدومين بتاع ال AddProduct
+        // في حالة ال Pending معلق  قيد الانتظار وده متحقق منه في الدومين بتاع ال AddProduct
         [HttpPost("{orderId}/items")]
         [CheckPermission(Roles.User)]
         public async Task<IActionResult> AddProduct(  int orderId, [FromBody] AddOrderItemDto dto)
@@ -59,7 +59,7 @@ namespace E_Commerce2.Controllers
         }
 
 
-        // في حالة ال Pending معلق 🕒 قيد الانتظار وده متحقق منه في الدومين بتاع ال UpdateQuantity
+        // في حالة ال Pending معلق  قيد الانتظار وده متحقق منه في الدومين بتاع ال UpdateQuantity
         [HttpPut("{orderId}/items/{productId}")]
         [CheckPermission(Roles.User)]
         public async Task<IActionResult> UpdateQuantity( int orderId, int productId, [FromBody] UpdateOrderItemQuantityDto dto)
@@ -88,7 +88,7 @@ namespace E_Commerce2.Controllers
             return Ok();
         }
 
-        // في حالة ال Pending معلق 🕒 قيد الانتظار وده متحقق منه في الدومين بتاع ال Remove
+        // في حالة ال Pending معلق  قيد الانتظار وده متحقق منه في الدومين بتاع ال Remove
         [HttpDelete("{orderId}/items/{productId}")]
         [CheckPermission(Roles.User)]
         public async Task<IActionResult> RemoveProduct( int orderId,int productId)
@@ -244,7 +244,7 @@ namespace E_Commerce2.Controllers
             if (order == null)
                 return NotFound(new { message = "Order not found" });
 
-            // ✅ Restore stock for cancelled orders
+            // Restore stock for cancelled orders
             foreach (var item in order.OrderItems)
             {
                 var product = await _unitOfWork.Products.GetByIdAsync(item.ProductId);
@@ -287,14 +287,14 @@ namespace E_Commerce2.Controllers
             if (order == null)
                 return NotFound(new { message = "Order not found" });
 
-            // ✅ Only allow deleting pending/cancelled orders
+            //  Only allow deleting pending/cancelled orders
             if (order.OrderStatus != OrderStatuses.Pending &&
                 order.OrderStatus != OrderStatuses.Cancelled)
             {
                 return BadRequest(new { message = "Cannot delete processed orders" });
             }
 
-            // ✅ Delete associated payment if exists
+            //  Delete associated payment if exists
             if (order.Payment != null)
             {
                 await _unitOfWork.Payments.DeleteAsync(order.Payment);

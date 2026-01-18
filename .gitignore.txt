@@ -1,8 +1,0 @@
-# Visual Studio
-.vs/
-bin/
-obj/
-
-# Configurations
-appsettings.Development.json
-

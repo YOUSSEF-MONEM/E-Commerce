@@ -15,20 +15,20 @@ namespace RepositoryPatternWithUnitOfWork.EF.MolulesConfigurations
              builder.ToTable("Payments");
              builder.HasKey(p => p.Id);
 
-             // ✅ Properties
+             //  Properties
              builder.Property(p => p.Amount)
                  .IsRequired()
-                 .HasColumnType("decimal(18,2)"); // ✅ تحديد Precision
+                 .HasColumnType("decimal(18,2)"); //  تحديد Precision
 
              builder.Property(p => p.PaymentDate)
                  .HasColumnType("datetime2");
 
              builder.Property(p => p.PaymentStatus)
                  .IsRequired()
-                 .HasConversion<int>(); // ✅ تخزين Enum كـ int
+                 .HasConversion<int>(); //  تخزين Enum كـ int
 
              builder.Property(p => p.PaymentMethod)
-                 .HasConversion<int?>(); // ✅ Nullable Enum
+                 .HasConversion<int?>(); //  Nullable Enum
 
              builder.Property(p => p.TransactionId)
                  .HasMaxLength(100);
@@ -39,7 +39,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.MolulesConfigurations
              builder.Property(p => p.UserId)
                  .IsRequired();
 
-             // ✅ Relationships
+             //  Relationships
 
              // Order Relationship (One-to-One) - Configured in Order side
              // User Relationship
@@ -48,9 +48,9 @@ namespace RepositoryPatternWithUnitOfWork.EF.MolulesConfigurations
                  .HasForeignKey(p => p.UserId)
                  .OnDelete(DeleteBehavior.Restrict);
 
-             // ✅ Indexes
+             //  Indexes
              builder.HasIndex(p => p.OrderId)
-                 .IsUnique() // ✅ كل Order له Payment واحد فقط
+                 .IsUnique() //  كل Order له Payment واحد فقط
                  .HasDatabaseName("IX_Payments_OrderId");
 
              builder.HasIndex(p => p.UserId)
@@ -60,14 +60,14 @@ namespace RepositoryPatternWithUnitOfWork.EF.MolulesConfigurations
                  .HasDatabaseName("IX_Payments_PaymentStatus");
 
              builder.HasIndex(p => p.TransactionId)
-                 .IsUnique() // ✅ TransactionId فريد
+                 .IsUnique() // TransactionId فريد
                  .HasDatabaseName("IX_Payments_TransactionId")
-                 .HasFilter("[TransactionId] IS NOT NULL"); // ✅ Unique فقط للقيم اللي مش null
+                 .HasFilter("[TransactionId] IS NOT NULL"); //  Unique فقط للقيم اللي مش null
 
              builder.HasIndex(p => p.PaymentDate)
                  .HasDatabaseName("IX_Payments_PaymentDate");
 
-             // ✅ Composite Index
+             //  Composite Index
              builder.HasIndex(p => new { p.UserId, p.PaymentStatus })
                  .HasDatabaseName("IX_Payments_UserId_PaymentStatus");
          }

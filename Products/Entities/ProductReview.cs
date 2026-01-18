@@ -13,20 +13,20 @@ namespace Products.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        // ✅ Optional: Rating or Comment (لكن واحد منهم على الأقل)
-        public double? Rating { get; private set; } // ⬅️ Nullable (0-10)
-        public string? Comment { get; private set; } // ⬅️ Nullable
+        //  Optional: Rating or Comment (لكن واحد منهم على الأقل)
+        public double? Rating { get; private set; } //  Nullable (0-10)
+        public string? Comment { get; private set; } //  Nullable
 
-        // ✅ Navigation Properties
+        //  Navigation Properties
         public Product Product { get; private set; } = null!;
 
-        // ✅ Constructor خاص للـ EF Core
+        //  Constructor خاص للـ EF Core
         private ProductReview()
         {
             CreatedAt = DateTime.UtcNow;
         }
 
-        // ✅ Factory Method
+        //  Factory Method
         public static Result<ProductReview> Create(
             int productId,
             int userId,
@@ -42,7 +42,7 @@ namespace Products.Entities
             if (userId <= 0)
                 return Result<ProductReview>.Failure("Invalid User ID");
 
-            // ✅ واحد على الأقل لازم يكون موجود (Rating أو Comment)
+            //  واحد على الأقل لازم يكون موجود (Rating أو Comment)
             if (!rating.HasValue && string.IsNullOrWhiteSpace(comment))
                 return Result<ProductReview>.Failure("Review must have either rating or comment");
 
@@ -50,7 +50,7 @@ namespace Products.Entities
             review.ProductId = productId;
             review.UserId = userId;
 
-            // ✅ Set Rating (if provided)
+            //  Set Rating (if provided)
             if (rating.HasValue)
             {
                 var ratingResult = review.SetRating(rating.Value);
@@ -58,7 +58,7 @@ namespace Products.Entities
                     return Result<ProductReview>.Failure(ratingResult.Error);
             }
 
-            // ✅ Set Comment (if provided)
+            //  Set Comment (if provided)
             if (!string.IsNullOrWhiteSpace(comment))
             {
                 var commentResult = review.SetComment(comment);
@@ -88,7 +88,7 @@ namespace Products.Entities
             return Result<ProductReview>.Success(productReview);
         }
 
-        // ✅ Set Rating (من 0 إلى 10)
+        //  Set Rating (من 0 إلى 10)
         public Result SetRating(double rating)
         {
             if (rating < 0 || rating > 10)
@@ -99,10 +99,10 @@ namespace Products.Entities
             return Result.Success();
         }
 
-        // ✅ Remove Rating (make it optional)
+        //  Remove Rating (make it optional)
         public Result RemoveRating()
         {
-            // ✅ Check: لازم يكون فيه Comment لو هنحذف الـ Rating
+            //  Check: لازم يكون فيه Comment لو هنحذف الـ Rating
             if (string.IsNullOrWhiteSpace(Comment))
                 return Result.Failure("Cannot remove rating. Review must have either rating or comment");
 
@@ -111,7 +111,7 @@ namespace Products.Entities
             return Result.Success();
         }
 
-        // ✅ Set Comment
+        //  Set Comment
         public Result SetComment(string comment)
         {
             if (string.IsNullOrWhiteSpace(comment))
@@ -128,10 +128,10 @@ namespace Products.Entities
             return Result.Success();
         }
 
-        // ✅ Remove Comment (make it optional)
+        //  Remove Comment (make it optional)
         public Result RemoveComment()
         {
-            // ✅ Check: لازم يكون فيه Rating لو هنحذف الـ Comment
+            //  Check: لازم يكون فيه Rating لو هنحذف الـ Comment
             if (!Rating.HasValue)
                 return Result.Failure("Cannot remove comment. Review must have either rating or comment");
 
@@ -140,10 +140,10 @@ namespace Products.Entities
             return Result.Success();
         }
 
-        // ✅ Update Review
+        //  Update Review
         public Result Update(double? rating = null, string? comment = null)
         {
-            // ✅ Check: واحد على الأقل لازم يكون موجود
+            //  Check: واحد على الأقل لازم يكون موجود
             if (!rating.HasValue && string.IsNullOrWhiteSpace(comment))
                 return Result.Failure("Review must have either rating or comment");
 
@@ -179,7 +179,7 @@ namespace Products.Entities
             return Result.Success();
         }
 
-        // ✅ Helper Methods
+        //  Helper Methods
         public bool HasRating() => Rating.HasValue;
 
         public bool HasComment() => !string.IsNullOrWhiteSpace(Comment);

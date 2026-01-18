@@ -9,10 +9,10 @@ namespace Users.Entities
         public int UserId { get; private set; }
         public Roles Role { get; private set; }
 
-        // ✅ Navigation Property
+        //  Navigation Property
         public  User User { get; private set; } 
 
-        // ✅ Constructor خاص للـ EF Core
+        //  Constructor خاص للـ EF Core
         private UserRoles() { }
 
         //  Internal Factory Method (للاستخدام من User فقط)

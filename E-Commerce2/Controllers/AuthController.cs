@@ -23,9 +23,7 @@ namespace E_Commerce2.Controllers
         // Helper Methods
         // ═══════════════════════════════════════════════════════════
 
-        /// <summary>
-        /// توليد Access Token (JWT قصير المدى - 15 دقيقة)
-        /// </summary>
+        // توليد Access Token (JWT قصير المدى - 15 دقيقة)
         private string GenerateAccessToken(Users.Entities.User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -57,9 +55,7 @@ namespace E_Commerce2.Controllers
             return tokenHandler.WriteToken(securityToken);
         }
 
-        /// <summary>
-        /// توليد Refresh Token (Random String آمن)
-        /// </summary>
+        // توليد Refresh Token (Random String آمن)
         private RefreshToken GenerateRefreshToken()
         {
             var randomNumber = new byte[64];
@@ -74,9 +70,7 @@ namespace E_Commerce2.Controllers
             };
         }
 
-        /// <summary>
-        /// حفظ Refresh Token في HttpOnly Cookie
-        /// </summary>
+        // حفظ Refresh Token في HttpOnly Cookie
         private void SetRefreshTokenInCookie(string refreshToken, DateTime expires)
         {
             var cookieOptions = new CookieOptions
@@ -112,9 +106,8 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
         }
 
-        /// <summary>
-        /// مسح Refresh Token من الـ Cookie
-        /// </summary>
+
+        // مسح Refresh Token من الـ Cookie
         private void DeleteRefreshTokenCookie()
         {
             //Response.Cookies.Delete("refreshToken");
@@ -130,13 +123,12 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
         // Authentication Endpoints
         // ═══════════════════════════════════════════════════════════
 
-        /// <summary>
-        /// Login - إرجاع Access Token + حفظ Refresh Token في Cookie
-        /// </summary>
+
+        // Login - إرجاع Access Token + حفظ Refresh Token في Cookie
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginDto requestLogin)
         {
-            // 1️⃣ التحقق من بيانات المستخدم
+            //  التحقق من بيانات المستخدم
             //await _unitOfWork.Users.Login(requestLogin.Email, requestLogin.Password)
             var userAuth = await _unitOfWork.Users.Login(requestLogin.Email, requestLogin.Password);
             // await _unitOfWork.Users.GetByIdWithRefreshTokensAsync(  );
@@ -145,27 +137,27 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
                 return Unauthorized(new { message = "Email or Password is incorrect" });
             }
 
-            // 2️⃣ توليد Access Token
+            //  توليد Access Token
             var accessToken = GenerateAccessToken(userAuth);
 
-            // 3️⃣ توليد Refresh Token
+            //  توليد Refresh Token
             var refreshToken = GenerateRefreshToken();
 
-            // 4️⃣ إضافة Refresh Token للمستخدم
+            //  إضافة Refresh Token للمستخدم
             if (userAuth!.RefreshTokens == null)
                 userAuth.RefreshTokens = new List<RefreshToken>();
 
             userAuth.RefreshTokens.Add(refreshToken);
 
-            // 5️⃣ حذف الـ Tokens القديمة غير النشطة (Cleanup)
+            //  حذف الـ Tokens القديمة غير النشطة (Cleanup)
             userAuth.RefreshTokens.RemoveAll(t => !t.IsActive && t.CreatedOn.AddDays(30) < DateTime.UtcNow);
 
             await _unitOfWork.SaveChangesAsync();
 
-            // 6️⃣ حفظ Refresh Token في HttpOnly Cookie
+            // حفظ Refresh Token في HttpOnly Cookie
             SetRefreshTokenInCookie(refreshToken.Token, refreshToken.ExpiresOn);
 
-            // 7️⃣ إرجاع Response
+            //  إرجاع Response
             return Ok(new
             {
                 accessToken = accessToken,
@@ -180,27 +172,26 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             });
         }
 
-        /// <summary>
-        /// Register - تسجيل مستخدم جديد + Login تلقائي
-        /// </summary>
+
+        //Register - تسجيل مستخدم جديد + Login تلقائي
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
-            // 1️⃣ Validation
+            // 1️ Validation
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // 2️⃣ التحقق من البريد الإلكتروني
+            // 2️ التحقق من البريد الإلكتروني
             var finedUserByEmail = await _unitOfWork.Users.FinedByEmail(dto.Email);
             if (finedUserByEmail == true)
                 return BadRequest(new { message = "Email already registered" });
 
-            // 3️⃣ التحقق من رقم الهاتف
+            // 3️ التحقق من رقم الهاتف
             var finedUserByPhoneNumber = await _unitOfWork.Users.FinedByPhone(dto.PhoneNumber);
             if (finedUserByPhoneNumber == true)
                 return BadRequest(new { message = "Phone Number already registered" });
 
-            // 4️⃣ إنشاء المستخدم
+            // 4️ إنشاء المستخدم
             var userResult = Users.Entities.User.Create(
                 dto.FirstName,
                 dto.LastName,
@@ -220,7 +211,7 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             await _unitOfWork.Users.AddAsync(userResult.Value);
             await _unitOfWork.SaveChangesAsync();
 
-            // 5️⃣ إنشاء Cart تلقائيًا
+            // 5️ إنشاء Cart تلقائيًا
             var cartResult = Cart.Create(userResult.Value!.Id);
             if (!cartResult.IsSuccess)
                 return BadRequest(new { message = cartResult.Error });
@@ -228,11 +219,11 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             await _unitOfWork.Carts.AddAsync(cartResult.Value!);
             await _unitOfWork.SaveChangesAsync();
 
-            // 6️⃣ توليد Tokens
+            // 6️ توليد Tokens
             var accessToken = GenerateAccessToken(userResult.Value);
             var refreshToken = GenerateRefreshToken();
 
-            // 7️⃣ إضافة Refresh Token
+            // 7️ إضافة Refresh Token
             if (userResult.Value.RefreshTokens == null)
                 userResult.Value.RefreshTokens = new List<RefreshToken>();
 
@@ -240,10 +231,10 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
 
             await _unitOfWork.SaveChangesAsync();
 
-            // 8️⃣ حفظ في Cookie
+            // 8️ حفظ في Cookie
             SetRefreshTokenInCookie(refreshToken.Token, refreshToken.ExpiresOn);
 
-            // 9️⃣ إرجاع Response
+            // 9️ إرجاع Response
             return Ok(new
             {
                 accessToken = accessToken,
@@ -258,19 +249,18 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             });
         }
 
-        /// <summary>
-        /// Refresh Token - الحصول على Access Token جديد
-        /// </summary>
+
+        // Refresh Token - الحصول على Access Token جديد
         [HttpPost("refresh-token")]
         public async Task<ActionResult> RefreshToken()
         {
-            // 1️⃣ قراءة Refresh Token من Cookie
+            // 1️ قراءة Refresh Token من Cookie
             var token = Request.Cookies["refreshToken"];
 
             if (string.IsNullOrEmpty(token))
                 return Unauthorized(new { message = "Refresh token not found" });
 
-            // 2️⃣ البحث عن المستخدم والـ Token
+            // 2️ البحث عن المستخدم والـ Token
             var users = await _unitOfWork.Users
                 .FindAsync(u => u.RefreshTokens!.Any(t => t.Token == token));
 
@@ -279,13 +269,13 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             if (user == null)
                 return Unauthorized(new { message = "Invalid refresh token" });
 
-            // 3️⃣ الحصول على الـ Refresh Token
+            // 3️ الحصول على الـ Refresh Token
             var refreshToken = user.RefreshTokens!.Single(t => t.Token == token);
 
-            // 4️⃣ التحقق من حالة الـ Token
+            // 4️ التحقق من حالة الـ Token
             if (!refreshToken.IsActive)
             {
-                // ⚠️ Token Reuse Detection - أمان إضافي
+                //  Token Reuse Detection - أمان إضافي
                 if (refreshToken.RevokedOn != null)
                 {
                     // Token استُخدم بعد ما اتمسح = هجوم محتمل!
@@ -305,22 +295,22 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
                 return Unauthorized(new { message = "Refresh token is not active" });
             }
 
-            // 5️⃣ إلغاء الـ Token القديم (Token Rotation)
+            // 5️ إلغاء الـ Token القديم (Token Rotation)
             refreshToken.RevokedOn = DateTime.UtcNow;
 
-            // 6️⃣ توليد Tokens جديدة
+            // 6️ توليد Tokens جديدة
             var newRefreshToken = GenerateRefreshToken();
             user.RefreshTokens.Add(newRefreshToken);
 
-            // 7️⃣ حذف الـ Tokens القديمة غير النشطة
+            // 7️ حذف الـ Tokens القديمة غير النشطة
             user.RefreshTokens.RemoveAll(t => !t.IsActive && t.CreatedOn.AddDays(30) < DateTime.UtcNow);
 
             await _unitOfWork.SaveChangesAsync();
 
-            // 8️⃣ توليد Access Token جديد
+            // 8️ توليد Access Token جديد
             var newAccessToken = GenerateAccessToken(user);
 
-            // 9️⃣ تحديث Cookie
+            // 9️ تحديث Cookie
             SetRefreshTokenInCookie(newRefreshToken.Token, newRefreshToken.ExpiresOn);
 
             return Ok(new
@@ -331,9 +321,7 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             });
         }
 
-        /// <summary>
-        /// Logout - مسح الـ Session الحالي فقط
-        /// </summary>
+        // Logout - مسح الـ Session الحالي فقط
         [HttpPost("logout")]
         [Authorize]
         public async Task<IActionResult> Logout()
@@ -362,9 +350,8 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             return Ok(new { message = "Logged out successfully" });
         }
 
-        /// <summary>
-        /// Revoke Token - إلغاء Token معين
-        /// </summary>
+
+        // Revoke Token - إلغاء Token معين
         [HttpPost("revoke-token")]
         [Authorize]
         public async Task<IActionResult> RevokeToken([FromBody] RevokeTokenDto model)
@@ -393,9 +380,8 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             return Ok(new { message = "Token revoked successfully" });
         }
 
-        /// <summary>
-        /// Logout من كل الأجهزة (إلغاء كل الـ Sessions)
-        /// </summary>
+
+        // Logout من كل الأجهزة (إلغاء كل الـ Sessions)
         [HttpPost("logout-all")]
         [Authorize]
         public async Task<IActionResult> LogoutFromAllDevices()
@@ -425,9 +411,7 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             return Ok(new { message = "Logged out from all devices successfully" });
         }
 
-        /// <summary>
-        /// الحصول على كل الـ Sessions النشطة
-        /// </summary>
+        // الحصول على كل الـ Sessions النشطة
         [HttpGet("active-sessions")]
         [Authorize]
         public async Task<ActionResult> GetActiveSessions()
@@ -462,9 +446,8 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
             });
         }
 
-        /// <summary>
-        /// Get Current User
-        /// </summary>
+
+        // Get Current User
         [HttpGet("me")]
         [Authorize]
         public async Task<ActionResult> GetCurrentUser()
@@ -497,6 +480,22 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
         public string? Token { get; set; }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

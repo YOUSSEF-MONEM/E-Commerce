@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Products.DTOs
 {
-    // ✅ DTO for Adding Single Image
+    //  DTO for Adding Single Image
     public class AddProductImageDto
     {
         [Required(ErrorMessage = "Image URL is required")]

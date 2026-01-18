@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Products.DTOs
 {
-    // ✅ Updated RegisterProductDto to include optional image
+    //  Updated RegisterProductDto to include optional image
     public class RegisterProductDto
     {
         [Required(ErrorMessage = "Product name is required")]

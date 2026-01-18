@@ -44,7 +44,7 @@ namespace Users.Entities
         public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; private set; }
 
-        // ✅ Navigation Properties
+        //  Navigation Properties
         public ICollection<UserRoles> Roles { get; private set; } = new List<UserRoles>();
 
         public List<RefreshToken>? RefreshTokens { get; set; }
@@ -160,7 +160,7 @@ namespace Users.Entities
             return Result.Success();
         }
 
-        // ✅ Method لإضافة Role
+        //  Method لإضافة Role
         public Result AddRole(Roles role)
         {
             // Check if role already exists
@@ -176,7 +176,7 @@ namespace Users.Entities
             return Result.Success();
         }
 
-        // ✅ Method لحذف Role
+        //  Method لحذف Role
         public Result RemoveRole(Roles role)
         {
             var userRole = Roles.FirstOrDefault(r => r.Role == role);
@@ -184,7 +184,7 @@ namespace Users.Entities
             if (userRole == null)
                 return Result.Failure("User does not have this role");
 
-            // ⚠️ Prevent removing last role
+            //  Prevent removing last role
             if (Roles.Count == 1)
                 return Result.Failure("User must have at least one role");
 
@@ -193,19 +193,19 @@ namespace Users.Entities
             return Result.Success();
         }
 
-        // ✅ Check if user has role
+        //  Check if user has role
         public bool HasRole(Roles role)
         {
             return Roles.Any(r => r.Role == role);
         }
 
-        // ✅ Check if user has any of the roles
+        //  Check if user has any of the roles
         public bool HasAnyRole(params Roles[] roles)
         {
             return Roles.Any(r => roles.Contains(r.Role));
         }
 
-        // ✅ SetName بدون Exception
+        //  SetName بدون Exception
         public Result SetName(string firstName, string lastName)
         {
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
@@ -236,7 +236,7 @@ namespace Users.Entities
         }
 
 
-        // ✅ SetAddress بدون Exception
+        // SetAddress بدون Exception
         public Result SetAddress(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
@@ -253,7 +253,7 @@ namespace Users.Entities
             return Result.Success();
         }
 
-        // ✅ SetBirthDate بدون Exception
+        //  SetBirthDate بدون Exception
         public Result SetBirthDate(DateOnly? birthDate)
         {
             const int minAge = 20;
@@ -270,7 +270,7 @@ namespace Users.Entities
             return Result.Success();
         }
 
-        // ✅ SetEmail بدون Exception
+        //  SetEmail بدون Exception
         public Result SetEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -284,7 +284,7 @@ namespace Users.Entities
             return Result.Success();
         }
 
-        // ✅ SetPassword بدون Exception
+        //  SetPassword بدون Exception
         public Result SetPassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -298,13 +298,13 @@ namespace Users.Entities
             return Result.Success();
         }
 
-        // ✅ VerifyPassword التحقق من كلمة المرور
+        //  VerifyPassword التحقق من كلمة المرور
         public bool VerifyPassword(string password)
         {
             return BCrypt.Net.BCrypt.Verify(password, Password);
         }
 
-        // ✅ ChangePassword مع Result Pattern
+        //  ChangePassword مع Result Pattern
         public Result ChangePassword(string currentPassword, string newPassword)
         {
             if (!VerifyPassword(currentPassword))
@@ -321,7 +321,7 @@ namespace Users.Entities
 }
 
 
-//// ✅ Factory Method بدون PhoneNumber (للحالات اللي مش محتاجة phone)
+////  Factory Method بدون PhoneNumber (للحالات اللي مش محتاجة phone)
 //public static Result<User> Create(
 //    string firstName,
 //    string lastName,
@@ -355,7 +355,7 @@ namespace Users.Entities
 //    return Result<User>.Success(user);
 //}
 
-//// ✅ Factory Method مع Role (افتراضي = User)
+//// Factory Method مع Role (افتراضي = User)
 //public static Result<User> Create(
 //    string firstName,
 //    string lastName,
@@ -364,7 +364,7 @@ namespace Users.Entities
 //    string email,
 //    string password,
 //    string phoneNumber,
-//    Roles role = Constants.Roles.User) // ✅ Default role
+//    Roles role = Constants.Roles.User) //  Default role
 //{
 //    var userResult = Create(firstName, lastName, address, birthDate, email, password);
 

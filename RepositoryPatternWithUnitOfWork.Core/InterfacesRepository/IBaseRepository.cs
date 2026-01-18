@@ -18,7 +18,7 @@ namespace RepositoryPatternWithUnitOfWork.Core.Interfaces
 
         Task<T?> UpdateAsync(T entity);
 
-        // ✅ FindAsync مع Include للـ Navigation Properties
+        //  FindAsync مع Include للـ Navigation Properties
         Task<IEnumerable<T>> FindAsync(
             Expression<Func<T, bool>> predicate,
             params Expression<Func<T, object>>[] includes);
