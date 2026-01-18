@@ -1,0 +1,15 @@
+E:\Projects\E-Commerce2\Categorys\bin\Debug\net10.0\Categories.deps.json
+E:\Projects\E-Commerce2\Categorys\bin\Debug\net10.0\Categories.dll
+E:\Projects\E-Commerce2\Categorys\bin\Debug\net10.0\Categories.pdb
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.AssemblyInfoInputs.cache
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.AssemblyInfo.cs
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.csproj.CoreCompileInputs.cache
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.dll
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\refint\Categories.dll
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.pdb
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\ref\Categories.dll
+E:\Projects\E-Commerce2\Categorys\bin\Debug\net10.0\Shared between modules.dll
+E:\Projects\E-Commerce2\Categorys\bin\Debug\net10.0\Shared between modules.pdb
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.csproj.AssemblyReference.cache
+E:\Projects\E-Commerce2\Categorys\obj\Debug\net10.0\Categories.csproj.Up2Date

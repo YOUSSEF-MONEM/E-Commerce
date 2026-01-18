@@ -1,0 +1,25 @@
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.deps.json
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Products.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Users.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Products.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Users.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.csproj.AssemblyReference.cache
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.AssemblyInfoInputs.cache
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.AssemblyInfo.cs
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.csproj.CoreCompileInputs.cache
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\Reposito.A6F540B8.Up2Date
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\refint\RepositoryPatternWithUnitOfWork.Core.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\obj\Debug\net10.0\ref\RepositoryPatternWithUnitOfWork.Core.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Categories.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Categories.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Carts.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Orders.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Carts.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Orders.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Shared between modules.dll
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.Core\bin\Debug\net10.0\Shared between modules.pdb

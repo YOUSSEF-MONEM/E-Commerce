@@ -1,0 +1,15 @@
+E:\Projects\E-Commerce2\Users\bin\Debug\net10.0\Users.deps.json
+E:\Projects\E-Commerce2\Users\bin\Debug\net10.0\Users.dll
+E:\Projects\E-Commerce2\Users\bin\Debug\net10.0\Users.pdb
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.csproj.AssemblyReference.cache
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.AssemblyInfoInputs.cache
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.AssemblyInfo.cs
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.csproj.CoreCompileInputs.cache
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.dll
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\refint\Users.dll
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.pdb
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\ref\Users.dll
+E:\Projects\E-Commerce2\Users\bin\Debug\net10.0\Shared between modules.dll
+E:\Projects\E-Commerce2\Users\bin\Debug\net10.0\Shared between modules.pdb
+E:\Projects\E-Commerce2\Users\obj\Debug\net10.0\Users.csproj.Up2Date

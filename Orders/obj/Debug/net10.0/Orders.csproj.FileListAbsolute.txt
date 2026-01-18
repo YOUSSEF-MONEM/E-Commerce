@@ -1,0 +1,15 @@
+E:\Projects\E-Commerce2\Orders\bin\Debug\net10.0\Orders.deps.json
+E:\Projects\E-Commerce2\Orders\bin\Debug\net10.0\Orders.dll
+E:\Projects\E-Commerce2\Orders\bin\Debug\net10.0\Orders.pdb
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.AssemblyInfoInputs.cache
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.AssemblyInfo.cs
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.csproj.CoreCompileInputs.cache
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.dll
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\refint\Orders.dll
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.pdb
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\ref\Orders.dll
+E:\Projects\E-Commerce2\Orders\bin\Debug\net10.0\Shared between modules.dll
+E:\Projects\E-Commerce2\Orders\bin\Debug\net10.0\Shared between modules.pdb
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.csproj.AssemblyReference.cache
+E:\Projects\E-Commerce2\Orders\obj\Debug\net10.0\Orders.csproj.Up2Date

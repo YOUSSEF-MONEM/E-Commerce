@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Users.Constants
+{
+    public enum Roles
+    {
+        User = 1,
+        Delivery,
+        Seller,
+        Admin,
+        Manegar
+    }
+}
