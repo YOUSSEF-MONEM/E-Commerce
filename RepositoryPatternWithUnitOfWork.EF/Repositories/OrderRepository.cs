@@ -29,7 +29,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.Repositories
 
         public override async Task<Order?> GetByIdAsync(int id)
         {
-            return await _dbContext.Orders.Include(o => o.OrderItems).FirstOrDefaultAsync(o => o.Id == id);
+            return await _dbContext.Orders.Include(o => o.OrderItems).AsSplitQuery().FirstOrDefaultAsync(o => o.Id == id);
         }
     }
 }

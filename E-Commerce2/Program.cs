@@ -10,6 +10,8 @@ using RepositoryPatternWithUnitOfWork.Core.Interfaces;
 using RepositoryPatternWithUnitOfWork.EF;
 using RepositoryPatternWithUnitOfWork.EF.Repositories;
 using System.Text;
+using Users.Interfaces;
+using Users.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +65,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddSingleton<IRegistrationNotification, RegistrationNotificationWithEmail>();
 
 
 builder.Services.AddCors(options =>

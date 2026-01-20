@@ -19,12 +19,12 @@ namespace RepositoryPatternWithUnitOfWork.EF.Repositories
 
         public override async Task<Product?> GetByIdAsync(int id)
         {
-            return await _dbContext.Products.Include(p => p.ProductImages).FirstOrDefaultAsync(p => p.Id == id);
+            return await _dbContext.Products.Include(p => p.ProductImages).AsSplitQuery().FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Product?> ViewByIdAsync(int id)
         {
-            return await _dbContext.Products.Include(p => p.ProductImages).AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+            return await _dbContext.Products.Include(p => p.ProductImages).AsSplitQuery().AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
         }
         public async Task<List<Product>> GetProductsByName(string name)
         {

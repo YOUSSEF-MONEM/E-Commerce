@@ -27,3 +27,34 @@ E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\Rep
 E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\ref\RepositoryPatternWithUnitOfWork.EF.dll
 E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Shared between modules.dll
 E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Shared between modules.pdb
+E:\Projects\E-Commerce2\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.sourcelink.json
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.deps.json
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.runtimeconfig.json
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Carts.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Categories.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Orders.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Products.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Shared between modules.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Users.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\RepositoryPatternWithUnitOfWork.Core.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Carts.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Categories.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Orders.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Products.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Shared between modules.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\bin\Debug\net10.0\Users.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.csproj.AssemblyReference.cache
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.AssemblyInfoInputs.cache
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.AssemblyInfo.cs
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.csproj.CoreCompileInputs.cache
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.sourcelink.json
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\Reposito.1A5408ED.Up2Date
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\refint\RepositoryPatternWithUnitOfWork.EF.dll
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.pdb
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\RepositoryPatternWithUnitOfWork.EF.genruntimeconfig.cache
+E:\Projects\E-Commerce\RepositoryPatternWithUnitOfWork.EF\obj\Debug\net10.0\ref\RepositoryPatternWithUnitOfWork.EF.dll

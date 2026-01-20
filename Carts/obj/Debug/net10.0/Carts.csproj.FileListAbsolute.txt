@@ -13,3 +13,20 @@ E:\Projects\E-Commerce2\Carts\obj\Debug\net10.0\Carts.csproj.AssemblyReference.c
 E:\Projects\E-Commerce2\Carts\bin\Debug\net10.0\Shared between modules.dll
 E:\Projects\E-Commerce2\Carts\bin\Debug\net10.0\Shared between modules.pdb
 E:\Projects\E-Commerce2\Carts\obj\Debug\net10.0\Carts.csproj.Up2Date
+E:\Projects\E-Commerce2\Carts\obj\Debug\net10.0\Carts.sourcelink.json
+E:\Projects\E-Commerce\Carts\bin\Debug\net10.0\Carts.deps.json
+E:\Projects\E-Commerce\Carts\bin\Debug\net10.0\Carts.dll
+E:\Projects\E-Commerce\Carts\bin\Debug\net10.0\Carts.pdb
+E:\Projects\E-Commerce\Carts\bin\Debug\net10.0\Shared between modules.dll
+E:\Projects\E-Commerce\Carts\bin\Debug\net10.0\Shared between modules.pdb
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.csproj.AssemblyReference.cache
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.AssemblyInfoInputs.cache
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.AssemblyInfo.cs
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.csproj.CoreCompileInputs.cache
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.sourcelink.json
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.csproj.Up2Date
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.dll
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\refint\Carts.dll
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\Carts.pdb
+E:\Projects\E-Commerce\Carts\obj\Debug\net10.0\ref\Carts.dll

@@ -13,3 +13,20 @@ E:\Projects\E-Commerce2\Products\bin\Debug\net10.0\Shared between modules.dll
 E:\Projects\E-Commerce2\Products\bin\Debug\net10.0\Shared between modules.pdb
 E:\Projects\E-Commerce2\Products\obj\Debug\net10.0\Products.csproj.AssemblyReference.cache
 E:\Projects\E-Commerce2\Products\obj\Debug\net10.0\Products.csproj.Up2Date
+E:\Projects\E-Commerce2\Products\obj\Debug\net10.0\Products.sourcelink.json
+E:\Projects\E-Commerce\Products\bin\Debug\net10.0\Products.deps.json
+E:\Projects\E-Commerce\Products\bin\Debug\net10.0\Products.dll
+E:\Projects\E-Commerce\Products\bin\Debug\net10.0\Products.pdb
+E:\Projects\E-Commerce\Products\bin\Debug\net10.0\Shared between modules.dll
+E:\Projects\E-Commerce\Products\bin\Debug\net10.0\Shared between modules.pdb
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.csproj.AssemblyReference.cache
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.AssemblyInfoInputs.cache
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.AssemblyInfo.cs
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.csproj.CoreCompileInputs.cache
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.sourcelink.json
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.csproj.Up2Date
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.dll
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\refint\Products.dll
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\Products.pdb
+E:\Projects\E-Commerce\Products\obj\Debug\net10.0\ref\Products.dll

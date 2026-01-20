@@ -23,7 +23,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.Repositories
 
         public virtual async Task<Cart?> GetCartByUserIdAsync(int userId)
         {
-            return await _dbContext.Carts.Include(c => c.CartProducts).FirstOrDefaultAsync(e => e.UserId == userId);
+            return await _dbContext.Carts.Include(c => c.CartProducts).AsSplitQuery().FirstOrDefaultAsync(e => e.UserId == userId);
         }
         //public  async Task<Cart?> GetByUserIdAsync(int userId)
         //{

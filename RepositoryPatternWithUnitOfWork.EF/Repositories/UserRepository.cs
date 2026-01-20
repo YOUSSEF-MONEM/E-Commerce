@@ -19,6 +19,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.Repositories
             //الـ FirstOrDefaultAsync بيرجع null تلقائياً لو مالقاش حاجة
             var user = await _dbContext.Users
                 .Include(u => u.Roles) //  Include Roles
+                .AsSplitQuery()
                 .FirstOrDefaultAsync(u => u.Id == id); ;    
             return user;
         }
@@ -29,6 +30,7 @@ namespace RepositoryPatternWithUnitOfWork.EF.Repositories
             var user = await _dbContext.Users
                 .Include(u => u.Roles) //  Include Roles
                 .Include(u => u.RefreshTokens) // ✅ Include للـ Tokens
+                .AsSplitQuery()
                 .FirstOrDefaultAsync(u => u.Email == email );
 
             if (user == null)
@@ -60,6 +62,7 @@ BCrypt.Net.BCrypt.HashPassword(password);
         {
             var users = await _dbContext.Users.AsNoTracking()
                 .Include(u => u.Roles) //  Include Roles
+                .AsSplitQuery()
                 .ToListAsync();
             //الـ ToListAsync() مش هيرجع null أبداً
             //هيرجع empty list لو مافيش
@@ -71,6 +74,7 @@ BCrypt.Net.BCrypt.HashPassword(password);
         {
             return await _dbContext.Users.AsNoTracking()
                 .Include(u => u.Roles) //  Include Roles
+                .AsSplitQuery()
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -86,6 +90,7 @@ BCrypt.Net.BCrypt.HashPassword(password);
             return await _dbContext.Users
                 .Include(u => u.RefreshTokens) // ✅ Include للـ Tokens
                 .Include(u => u.Roles)
+                .AsSplitQuery()
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
     }

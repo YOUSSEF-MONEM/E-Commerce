@@ -11,12 +11,14 @@ using System.Security.Cryptography;
 using System.Text;
 using Users.DTOs;
 using Users.Entities;
+using Users.Interfaces;
 
 namespace E_Commerce2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IUnitOfWork _unitOfWork, JwtOptions jwtOptions, IWebHostEnvironment env) : ControllerBase
+    public class AuthController(IUnitOfWork _unitOfWork, JwtOptions jwtOptions, IWebHostEnvironment env
+        ,IRegistrationNotification notification) : ControllerBase
     {
         private readonly IWebHostEnvironment _env = env;
         // ═══════════════════════════════════════════════════════════
@@ -174,65 +176,69 @@ SameSite = SameSiteMode.None    // عشان يشتغل مع Angular أو React
 
 
         //Register - تسجيل مستخدم جديد + Login تلقائي
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
-        {
-            // 1️ Validation
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            [HttpPost("register")]
+            public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+            {
+                // 1️ Validation
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-            // 2️ التحقق من البريد الإلكتروني
-            var finedUserByEmail = await _unitOfWork.Users.FinedByEmail(dto.Email);
-            if (finedUserByEmail == true)
-                return BadRequest(new { message = "Email already registered" });
+                // 2️ التحقق من البريد الإلكتروني
+                var finedUserByEmail = await _unitOfWork.Users.FinedByEmail(dto.Email);
+                if (finedUserByEmail == true)
+                    return BadRequest(new { message = "Email already registered" });
 
-            // 3️ التحقق من رقم الهاتف
-            var finedUserByPhoneNumber = await _unitOfWork.Users.FinedByPhone(dto.PhoneNumber);
-            if (finedUserByPhoneNumber == true)
-                return BadRequest(new { message = "Phone Number already registered" });
+                // 3️ التحقق من رقم الهاتف
+                var finedUserByPhoneNumber = await _unitOfWork.Users.FinedByPhone(dto.PhoneNumber);
+                if (finedUserByPhoneNumber == true)
+                    return BadRequest(new { message = "Phone Number already registered" });
 
-            // 4️ إنشاء المستخدم
-            var userResult = Users.Entities.User.Create(
-                dto.FirstName,
-                dto.LastName,
-                dto.Address,
-                dto.BirthDate,
-                dto.Email,
-                dto.Password,
-                dto.PhoneNumber
-            );
+                // 4️ إنشاء المستخدم
+                var userResult = Users.Entities.User.Create(
+                    dto.FirstName,
+                    dto.LastName,
+                    dto.Address,
+                    dto.BirthDate,
+                    dto.Email,
+                    dto.Password,
+                    dto.PhoneNumber
+                );
 
-            if (!userResult.IsSuccess)
-                return BadRequest(new { message = userResult.Error });
+                if (!userResult.IsSuccess)
+                    return BadRequest(new { message = userResult.Error });
 
-            if (userResult.Value == null)
-                return BadRequest(new { message = "Failed to create user" });
+                if (userResult.Value == null)
+                    return BadRequest(new { message = "Failed to create user" });
 
-            await _unitOfWork.Users.AddAsync(userResult.Value);
-            await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.Users.AddAsync(userResult.Value);
+                await _unitOfWork.SaveChangesAsync();
 
-            // 5️ إنشاء Cart تلقائيًا
-            var cartResult = Cart.Create(userResult.Value!.Id);
-            if (!cartResult.IsSuccess)
-                return BadRequest(new { message = cartResult.Error });
+                // 5️ إنشاء Cart تلقائيًا
+                var cartResult = Cart.Create(userResult.Value!.Id);
+                if (!cartResult.IsSuccess)
+                    return BadRequest(new { message = cartResult.Error });
 
-            await _unitOfWork.Carts.AddAsync(cartResult.Value!);
-            await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.Carts.AddAsync(cartResult.Value!);
+                await _unitOfWork.SaveChangesAsync();
 
-            // 6️ توليد Tokens
-            var accessToken = GenerateAccessToken(userResult.Value);
-            var refreshToken = GenerateRefreshToken();
+                // 6️ توليد Tokens
+                var accessToken = GenerateAccessToken(userResult.Value);
+                var refreshToken = GenerateRefreshToken();
 
-            // 7️ إضافة Refresh Token
-            if (userResult.Value.RefreshTokens == null)
-                userResult.Value.RefreshTokens = new List<RefreshToken>();
+                // 7️ إضافة Refresh Token
+                if (userResult.Value.RefreshTokens == null)
+                    userResult.Value.RefreshTokens = new List<RefreshToken>();
 
-            userResult.Value.RefreshTokens.Add(refreshToken);
+                userResult.Value.RefreshTokens.Add(refreshToken);
 
-            await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
 
-            // 8️ حفظ في Cookie
-            SetRefreshTokenInCookie(refreshToken.Token, refreshToken.ExpiresOn);
+                // 8️ حفظ في Cookie
+                SetRefreshTokenInCookie(refreshToken.Token, refreshToken.ExpiresOn);
+            
+                //string userName = dto.FirstName + " " + dto.LastName;
+
+                notification.NotifyUserRegistration( dto.Email, dto.FirstName + " " + dto.LastName);
 
             // 9️ إرجاع Response
             return Ok(new
